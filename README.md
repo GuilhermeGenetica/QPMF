@@ -12,16 +12,7 @@ O QPMF foi concebido como uma infraestrutura modular e reprodutível para avalia
 
 ## 🚀 Arquitetura do pipeline (fluxo de dados)
 
-```mermaid
-graph TD
-    A[Gerador_VCF.py] -->|Gera VCF + CSV| B[preprocess_32_features.py]
-    B -->|Matriz 32D Normalizada| C[Classificador_Hibrido.py]
-    C -->|Feature Selection (HQGA)| D[BENCHMARK_MASTER.py]
-    D -->|Orquestração| E{Modelos Quânticos A-G}
-    D -->|Baseline| F[Benchmark Clássico]
-```
-
-**Ordem de execução (obrigatória para reprodução):**
+    **Ordem de execução (obrigatória para reprodução):**
 
 1. `Gerador_VCF.py` — gera `dados_geneticos.vcf` + `fenotipos.csv` (simulação com LD e epistasia).
 2. `preprocess_32_features.py` — engenharia de features, filtros ACMG/AMP, normalização L2 (para amplitude embedding).
@@ -32,8 +23,9 @@ graph TD
 
 ---
 
-## 🧠 Modelos Implementados (Suite 2025)
 
+## 🧠 Modelos Implementados (Suite 2025)
+```
 | ID  | Nome do Modelo             | Arquitetura / Técnica chave                                                                 | Observações                                                                  |
 |-----|----------------------------|---------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
 | A   | QNN Híbrido                | Amplitude Embedding + StronglyEntanglingLayers (3 camadas), LR Scheduler, Cold Start        | Compressão das 32 features em 5 qubits (`2^5 = 32`)                          |
@@ -44,7 +36,7 @@ graph TD
 | F   | Hierarchical TN            | Tree Tensor Networks (TTN) e MERA                                                           | Modela hierarquias biológicas (genes → vias → fenótipo)                      |
 | G   | QNN ICO                    | Interference Control Optimization com Ancilla qubit                                         | Controlo de interferência construtiva/destrutiva como mecanismo de decisão   |
 | Ref | Clássico Robusto (Baseline)| Random Forest, SVM Linear, Gradient Boosting, KNN com PCA interno                           | Serve como barra de comparação (esperado ~77–80% em dados simulados)         |
-
+```
 ---
 
 ## 📂 Estrutura de Ficheiros (resumo)
